@@ -12,10 +12,7 @@ This project is a React Native application that implements the UI of two screens
 
 ## Screenshots
 
-![Screen 1](path/to/screen-1.png)
-![Screen 2](path/to/screen-2.png)
-![Screen 3](path/to/screen-3.png)
-![Screen 4](path/to/screen-4.png)
+The screenshots are located in the Screenshots folder.
 
 ## Getting Started
 
