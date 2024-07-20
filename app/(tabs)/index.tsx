@@ -1,70 +1,97 @@
-import { Image, StyleSheet, Platform } from 'react-native';
+import { router } from 'expo-router';
+import React from 'react';
+import { View, Text, Image, TouchableOpacity, StatusBar, StyleSheet } from 'react-native';
+import GradientText from "react-native-gradient-texts";
+import tw from 'twrnc';
 
-import { HelloWave } from '@/components/HelloWave';
-import ParallaxScrollView from '@/components/ParallaxScrollView';
-import { ThemedText } from '@/components/ThemedText';
-import { ThemedView } from '@/components/ThemedView';
+export default function Login() {
+  StatusBar.setBarStyle('dark-content', true);
 
-export default function HomeScreen() {
   return (
-    <ParallaxScrollView
-      headerBackgroundColor={{ light: '#A1CEDC', dark: '#1D3D47' }}
-      headerImage={
+    <View style={{ flex: 1, alignItems: 'center', backgroundColor: 'white' }}>
+      <View style={styles.imageContainer}>
         <Image
-          source={require('@/assets/images/partial-react-logo.png')}
-          style={styles.reactLogo}
+          source={require('@/assets/images/photo-1.jpeg')}
+          style={tw.style('w-full', { flex: 1, objectFit: 'cover' })}
         />
-      }>
-      <ThemedView style={styles.titleContainer}>
-        <ThemedText type="title">Welcome!</ThemedText>
-        <HelloWave />
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Step 1: Try it</ThemedText>
-        <ThemedText>
-          Edit <ThemedText type="defaultSemiBold">app/(tabs)/index.tsx</ThemedText> to see changes.
-          Press{' '}
-          <ThemedText type="defaultSemiBold">
-            {Platform.select({ ios: 'cmd + d', android: 'cmd + m' })}
-          </ThemedText>{' '}
-          to open developer tools.
-        </ThemedText>
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Step 2: Explore</ThemedText>
-        <ThemedText>
-          Tap the Explore tab to learn more about what's included in this starter app.
-        </ThemedText>
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Step 3: Get a fresh start</ThemedText>
-        <ThemedText>
-          When you're ready, run{' '}
-          <ThemedText type="defaultSemiBold">npm run reset-project</ThemedText> to get a fresh{' '}
-          <ThemedText type="defaultSemiBold">app</ThemedText> directory. This will move the current{' '}
-          <ThemedText type="defaultSemiBold">app</ThemedText> to{' '}
-          <ThemedText type="defaultSemiBold">app-example</ThemedText>.
-        </ThemedText>
-      </ThemedView>
-    </ParallaxScrollView>
+        {/* Image Overlay */}
+        <View style={styles.overlay} />
+        {/* Progress Bar */}
+        <View style={styles.progressBarContainer}>
+          <View style={styles.progressBar}>
+            <View style={styles.progress} />
+          </View>
+        </View>
+      </View>
+
+      <View style={tw.style('w-full bg-white pt-3 pb-14', { flex: 0.4, alignItems: 'center' })}>
+        <View style={tw.style('w-full flex flex-row items-center pr-0.5 pl-2')}>
+          <View style={tw.style('w-1/3')}>
+            <GradientText
+              text={"01"}
+              fontSize={100}
+              locations={{ x: 60, y: 80 }}
+              isGradientFill
+              gradientColors={["#D3D3D3", "#E5E4E2"]}
+            />
+          </View>
+          <View style={tw.style('flex-1 pr-2')}>
+            <Text style={tw.style('font-semibold', {fontSize: 19, lineHeight: 23,})}>
+              Welcome to
+              <Text style={tw.style('uppercase', { color: '#00A6FB' })}> Spingo!</Text> Your ultimate Business Companion.
+            </Text>
+          </View>
+        </View>
+
+        <View  style={tw.style('w-full pl-4 pr-2.5 pt-1', { color: '#00A6FB' })}>
+          <Text style={tw.style('text-sm')}>
+            Streamline your business operations and maximize efficiency with our all-in-one platform.
+          </Text>
+        </View>
+
+        <View style={tw.style('w-full mt-12 px-7')}>
+          <TouchableOpacity 
+            onPress={() => router.push('/home')}
+            style={tw.style('w-full  mb-4', { backgroundColor: '#00A6FB', borderRadius: 51, })}>
+            <Text style={tw.style('py-3.5 text-center text-base', { color: 'white', letterSpacing: 0.8 })}>Home</Text>
+          </TouchableOpacity>
+
+          <TouchableOpacity style={tw.style('w-full border-2 border-[#00A6FB]', { borderRadius: 51, })}>
+            <Text style={tw.style('py-3.5 text-center text-base', { color: '#00A6FB', letterSpacing: 0.8 })}>Sign up</Text>
+          </TouchableOpacity>
+        </View>
+      </View>
+    </View>
   );
 }
 
 const styles = StyleSheet.create({
-  titleContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: 8,
+  imageContainer: {
+    flex: 0.6,
+    width: '100%',
+    position: 'relative',
   },
-  stepContainer: {
-    gap: 8,
-    marginBottom: 8,
+  overlay: {
+    ...StyleSheet.absoluteFillObject,
+    backgroundColor: 'rgba(0, 0, 0, 0.5)',
   },
-  reactLogo: {
-    height: 178,
-    width: 290,
-    bottom: 0,
-    left: 0,
+  progressBarContainer: {
+    width: '100%',
     position: 'absolute',
+    bottom: 0,
+    paddingHorizontal: 50,
+    paddingBottom: 10,
   },
+  progressBar: {
+    height: 6,
+    width: '100%',
+    backgroundColor: 'lightgray',
+    borderRadius: 4,
+  },
+  progress: {
+    height: '100%',
+    width: '45%',
+    backgroundColor: '#00A6FB',
+    borderRadius: 10,
+  }
 });
